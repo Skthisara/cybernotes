@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CyberNotes - Hacker Style Notepad</title>
+
+<!-- SEO -->
+<meta name="description" content="CyberNotes - Free hacker style online notepad to save your notes easily.">
+<meta name="keywords" content="notepad, hacker notes, online notes, cyber notes">
+<meta name="author" content="CyberNotes">
+
+<style>
+body {
+    background: black;
+    color: #00ff00;
+    font-family: monospace;
+    text-align: center;
+}
+
+h1 {
+    text-shadow: 0 0 10px #00ff00;
+}
+
+textarea {
+    width: 90%;
+    height: 300px;
+    background: black;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 10px;
+    outline: none;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    background: black;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00ff00;
+    color: black;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<h1>CYBER NOTES SYSTEM</h1>
+
+<p>> Secure. Fast. Hidden.</p>
+
+<textarea id="note" placeholder="Type your secret notes..."></textarea><br>
+
+<button onclick="saveNote()">Save</button>
+<button onclick="clearNote()">Clear</button>
+<button onclick="downloadNote()">Download</button>
+
+<footer>© 2026 CyberNotes</footer>
+
+<script>
+// load saved note
+window.onload = function() {
+    document.getElementById("note").value = localStorage.getItem("note") || "";
+}
+
+// save
+function saveNote() {
+    let text = document.getElementById("note").value;
+    localStorage.setItem("note", text);
+    alert("Saved 💾");
+}
+
+// clear
+function clearNote() {
+    document.getElementById("note").value = "";
+    localStorage.removeItem("note");
+}
+
+// download
+function downloadNote() {
+    let text = document.getElementById("note").value;
+    let blob = new Blob([text], { type: "text/plain" });
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "cybernotes.txt";
+    a.click();
+}
+</script>
+
+</body>
+</html>
