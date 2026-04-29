@@ -72,33 +72,4 @@ footer {
 
 <script>
 // load saved note
-window.onload = function() {
-    document.getElementById("note").value = localStorage.getItem("note") || "";
-}
-
-// save
-function saveNote() {
-    let text = document.getElementById("note").value;
-    localStorage.setItem("note", text);
-    alert("Saved 💾");
-}
-
-// clear
-function clearNote() {
-    document.getElementById("note").value = "";
-    localStorage.removeItem("note");
-}
-
-// download
-function downloadNote() {
-    let text = document.getElementById("note").value;
-    let blob = new Blob([text], { type: "text/plain" });
-    let a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "cybernotes.txt";
-    a.click();
-}
-</script>
-
-</body>
-</html>
+window.onload = func
