@@ -4,18 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CyberNotes - Hacker Style Notepad</title>
-
-<!-- SEO -->
-<meta name="description" content="CyberNotes - Free hacker style online notepad to save your notes easily.">
-<meta name="keywords" content="notepad, hacker notes, online notes, cyber notes">
-<meta name="author" content="CyberNotes">
+<title>CyberNotes</title>
 
 <style>
 body {
-    background: black;
+    margin: 0;
+    background: radial-gradient(circle at center, #050505, #000000);
     color: #00ff00;
     font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    border: 1px solid #00ff00;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ff00;
     text-align: center;
 }
 
@@ -24,32 +33,35 @@ h1 {
 }
 
 textarea {
-    width: 90%;
-    height: 300px;
+    width: 100%;
+    height: 250px;
     background: black;
     color: #00ff00;
     border: 1px solid #00ff00;
     padding: 10px;
     outline: none;
-    box-shadow: 0 0 10px #00ff00;
+    resize: none;
+    box-shadow: inset 0 0 10px #00ff00;
 }
 
 button {
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 10px 15px;
     background: black;
     color: #00ff00;
     border: 1px solid #00ff00;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
     background: #00ff00;
     color: black;
+    box-shadow: 0 0 10px #00ff00;
 }
 
 footer {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 12px;
     opacity: 0.6;
 }
@@ -58,18 +70,55 @@ footer {
 
 <body>
 
-<h1>CYBER NOTES SYSTEM</h1>
+<div class="container">
+    <h1>CYBER NOTES</h1>
+    <p>> secure note system</p>
 
-<p>> Secure. Fast. Hidden.</p>
+    <textarea id="note" placeholder="Type your notes..."></textarea>
 
-<textarea id="note" placeholder="Type your secret notes..."></textarea><br>
+    <div>
+        <button onclick="clearNote()">Clear</button>
+        <button onclick="downloadNote()">Download</button>
+    </div>
 
-<button onclick="saveNote()">Save</button>
-<button onclick="clearNote()">Clear</button>
-<button onclick="downloadNote()">Download</button>
+    <!-- YouTube Section -->
+    <div style="margin-top:20px;">
+        <p>> Support the system 👇</p>
+        <a href="https://www.youtube.com/@heartbeatslk3" target="_blank">
+            <button>Subscribe YouTube 🔴</button>
+        </a>
+    </div>
 
-<footer>© 2026 CyberNotes</footer>
+    <footer>Auto Save Enabled 💾</footer>
+</div>
 
 <script>
-// load saved note
-window.onload = func
+// Load
+window.onload = function() {
+    document.getElementById("note").value = localStorage.getItem("note") || "";
+}
+
+// Auto Save
+document.getElementById("note").addEventListener("input", function() {
+    localStorage.setItem("note", this.value);
+});
+
+// Clear
+function clearNote() {
+    document.getElementById("note").value = "";
+    localStorage.removeItem("note");
+}
+
+// Download
+function downloadNote() {
+    let text = document.getElementById("note").value;
+    let blob = new Blob([text], { type: "text/plain" });
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "cybernotes.txt";
+    a.click();
+}
+</script>
+
+</body>
+</html>
